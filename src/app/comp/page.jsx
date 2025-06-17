@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import Navbar from "../components/Navbar";
+import AddEvent from "../components/AddEvent";
 
 export default function GeminiChat() {
   const [input, setInput] = useState("");
@@ -16,6 +18,7 @@ export default function GeminiChat() {
 
   return (
     <div className="p-4">
+      <Navbar />
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
@@ -29,6 +32,8 @@ export default function GeminiChat() {
         Ask
       </button>
       <pre className="mt-4 whitespace-pre-wrap">{output}</pre>
+      <h1 className="text-4xl font-bold mb-6">AI Calendar Tool</h1>
+      <AddEvent />
     </div>
   );
 }
