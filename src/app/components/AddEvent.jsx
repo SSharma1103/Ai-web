@@ -29,21 +29,50 @@ export default function AddEvent() {
   }
 
   if (!session) {
-    return <p className="text-red-500">Please sign in to add events</p>;
+    return <p className="text-red-400/90">Please sign in to add events</p>;
   }
 
   return (
-    <div className="space-y-4">
-      <button
-        onClick={handleAddEvent}
-        disabled={loading}
-        className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-      >
-        {loading ? "Adding..." : "Add Calendar Event"}
-      </button>
-      {response && response.success && (
-        <p className="text-green-500">✅ Event created!</p>
-      )}
+    <div className="flex flex-col h-[50vh] w-full p-6 rounded-lg border border-white/20 shadow-lg backdrop-blur-md bg-white/10">
+      <div className="flex-1">
+        <h2 className="text-xl font-bold mb-2 text-white">AI Calendar Assistant</h2>
+        <p className="text-white/80 mb-4">
+          This AI agent helps you quickly schedule meetings by automating calendar event creation.
+          When you click the button, it will:
+        </p>
+        <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Create a 30-minute event starting now</li>
+          <li>Set the title to "AI+ Meeting"</li>
+          <li>Add a description "Team sync up with AI team"</li>
+          <li>Handle all the API calls to your calendar service</li>
+        </ul>
+      </div>
+      
+      <div className="flex flex-col items-end space-y-2">
+        <button
+          onClick={handleAddEvent}
+          disabled={loading}
+          className="px-6 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 disabled:opacity-50 transition-all shadow-lg border border-white/20 backdrop-blur-sm"
+        >
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Adding...
+            </span>
+          ) : (
+            "Add Calendar Event"
+          )}
+        </button>
+
+        {response && response.success && (
+          <div className="w-full p-3 bg-green-400/20 text-green-100 rounded-lg backdrop-blur-sm border border-green-400/30">
+            ✅ Event created successfully!
+          </div>
+        )}
+      </div>
     </div>
   );
 }
