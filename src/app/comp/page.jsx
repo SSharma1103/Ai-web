@@ -3,6 +3,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import AddEvent from "../components/AddEvent";
 import SendMailButton from "../components/SendMailButton";
+import CommentModerator from "../components/CommentModerator";
 
 export default function GeminiChat() {
   const [input, setInput] = useState("");
@@ -51,6 +52,8 @@ export default function GeminiChat() {
         <AddEvent />
         <div className="h-8" />
         <SendMailButton />
+        <div className="h-8" />
+        <CommentModerator />
       </div>
     </div>
   );
