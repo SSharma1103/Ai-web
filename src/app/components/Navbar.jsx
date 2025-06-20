@@ -21,17 +21,6 @@ export default function Navbar() {
           Home
         </Link>
         <Link
-          href="/about"
-          className={`text-lg font-medium transition-all duration-300 px-2 py-1 border-b-2
-            ${
-              pathname === "/about"
-                ? "text-white border-white"
-                : "text-white/90 border-transparent hover:border-white"
-            }`}
-        >
-          About
-        </Link>
-        <Link
           href="/comp"
           className={`text-lg font-medium transition-all duration-300 px-2 py-1 border-b-2
             ${
