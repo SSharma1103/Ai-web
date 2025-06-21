@@ -21,7 +21,7 @@ export default function Navbar() {
           Home
         </Link>
         <Link
-          href="/comp"
+          href="/google"
           className={`text-lg font-medium transition-all duration-300 px-2 py-1 border-b-2
             ${
               pathname === "/comp"
@@ -29,7 +29,18 @@ export default function Navbar() {
                 : "text-white/90 border-transparent hover:border-white"
             }`}
         >
-          Comp
+          google
+        </Link>
+        <Link
+          href="/llms"
+          className={`text-lg font-medium transition-all duration-300 px-2 py-1 border-b-2
+            ${
+              pathname === "/comp"
+                ? "text-white border-white"
+                : "text-white/90 border-transparent hover:border-white"
+            }`}
+        >
+          LLMs
         </Link>
       </div>
     </nav>

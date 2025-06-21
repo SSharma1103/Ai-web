@@ -29,6 +29,7 @@ export default function GeminiChat() {
         </h1>
 
         <div className="flex flex-col h-[50vh] w-full p-6 rounded-lg border border-white/20 shadow-lg backdrop-blur-md bg-white/10">
+        <h2 className="text-xl font-bold mb-2 text-white">LLM</h2>
           <p className="text-white mb-2 text-sm">
             Integrate LLMs into your website, automate tasks, and more!
           </p>
@@ -48,10 +49,6 @@ export default function GeminiChat() {
           </div>
           <pre className="mt-4 text-white whitespace-pre-wrap">{output}</pre>
         </div>
-        <div className="h-8" />
-        <AddEvent />
-        <div className="h-8" />
-        <SendMailButton />
         <div className="h-8" />
         <CommentModerator />
       </div>

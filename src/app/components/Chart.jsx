@@ -70,7 +70,7 @@ export default function Chart() {
       >
         {session ? (
           <Link
-            href="/comp"
+            href="/google"
             className="absolute bottom-8 right-8 px-6 py-3 rounded-xl text-white font-medium backdrop-blur-sm bg-white/10 border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 flex items-center gap-2 group"
           >
             Take a Demo
