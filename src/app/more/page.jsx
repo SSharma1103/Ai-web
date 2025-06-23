@@ -2,6 +2,7 @@
 
 import More from "../components/Wf1";
 import Navbar from "../components/Navbar";
+import ScrumSteps from "../components/Wf2";
 
 export default function Workflow() {
   return (
@@ -14,7 +15,11 @@ export default function Workflow() {
           </span>
         </h1>
       <div className="h-2"></div>
+      <ScrumSteps/>
+     
+     <div className="h-8"></div>
      <More />
+     
      </div>
     </div>
   );

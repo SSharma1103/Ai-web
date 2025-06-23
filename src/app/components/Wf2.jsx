@@ -1,51 +1,55 @@
 "use client";
 
 import {
-  EnvelopeIcon,
-  CalendarDaysIcon,
-  CheckCircleIcon,
+  ClipboardDocumentCheckIcon,
+  WrenchScrewdriverIcon,
+  PresentationChartLineIcon,
+  ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 
-export default function More() {
+export default function ScrumSteps() {
   const steps = [
     {
-      title: "1. Parse Email",
-      description: "AI extracts date, time, and meeting details from email content.",
-      color: "bg-red-500",
-      Icon: EnvelopeIcon,
+      title: "1. Plan",
+      description: "Identify features or tasks for the next sprint.",
+      color: "bg-purple-500",
+      Icon: ClipboardDocumentCheckIcon,
     },
     {
-      title: "2. Create Event",
-      description: "AI formats the extracted info into a calendar event structure.",
-      color: "bg-green-500",
-      Icon: CalendarDaysIcon,
+      title: "2. Design & Build",
+      description: "Develop and test the chosen features.",
+      color: "bg-yellow-500",
+      Icon: WrenchScrewdriverIcon,
     },
     {
-      title: "3. Add to Calendar",
-      description: "Automatically adds the event to your Google Calendar.",
-      color: "bg-blue-500",
-      Icon: CheckCircleIcon,
+      title: "3. Review",
+      description: "Demo work to stakeholders, collect feedback.",
+      color: "bg-teal-500",
+      Icon: PresentationChartLineIcon,
+    },
+    {
+      title: "4. Improve",
+      description: "Retrospective to refine process for the next sprint.",
+      color: "bg-pink-500",
+      Icon: ArrowPathIcon,
     },
   ];
 
   return (
     <div className="w-full flex flex-col items-center px-6 py-5 rounded-lg border border-white/20 shadow-lg backdrop-blur-md bg-white/10 text-white">
-      {/* Heading */}
       <h2 className="w-full text-left text-xl font-bold mb-2 text-white">
-        Meeting Scheduler from Emails
+        Scrum Workflow Steps
       </h2>
-
-      {/* Subtitle / Detail */}
       <p className="w-full text-left text-sm text-white/80 mb-6">
-        This flow uses <span className="font-semibold text-white">AI agents</span> to automatically extract meeting details from emails and create calendar events with minimal human effort.
+        This process uses <span className="font-semibold text-white">AI agents</span> to automate planning, progress tracking, and retrospective analysis.
       </p>
 
       {/* Connector Line */}
       <div className="hidden lg:flex w-full justify-center relative mb-10">
-        <div className="absolute top-[90px] w-[70%] h-[2px] bg-white/30 z-0" />
+        <div className="absolute top-[90px] w-[80%] h-[2px] bg-white/30 z-0" />
       </div>
 
-      {/* Step Boxes */}
+      {/* Boxes */}
       <div className="flex flex-wrap justify-center items-start gap-10 max-w-7xl w-full">
         {steps.map((step, idx) => {
           const Icon = step.Icon;
