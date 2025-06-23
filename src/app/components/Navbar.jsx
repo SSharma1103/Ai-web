@@ -51,7 +51,7 @@ export default function Navbar() {
                 : "text-white/90 border-transparent hover:border-white"
             }`}
         >
-          More
+          Workflows
         </Link>
       </div>
     </nav>
