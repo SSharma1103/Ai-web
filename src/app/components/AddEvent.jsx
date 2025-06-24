@@ -1,10 +1,13 @@
 "use client";
 
-import { useSession, signIn } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AddEvent() {
   const { data: session } = useSession();
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
@@ -38,6 +41,12 @@ export default function AddEvent() {
     } catch (err) {
       console.error("Error adding event:", err);
       setError(err.message || "An unknown error occurred.");
+
+      // Automatically sign out and redirect home
+      setTimeout(async () => {
+        await signOut({ redirect: false });
+        router.push("/");
+      }, 2000); // wait 2 seconds so user sees the error
     } finally {
       setLoading(false);
     }
@@ -99,7 +108,8 @@ export default function AddEvent() {
 
         {error && (
           <div className="w-full p-3 bg-red-500/20 text-red-200 rounded-lg backdrop-blur-sm border border-red-400/30">
-            ❌ {error}
+            ❌ {error} <br />
+            You will be signed out automatically.
           </div>
         )}
       </div>
