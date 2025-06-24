@@ -13,14 +13,14 @@ export default function Google() {
       <Navbar />
       <div className="p-4 bg-black">
 
-        <h1 className="text-5xl font-bold text-white mb-4">
+        <h1 className="text-5xl font-bold text-white ">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400">
             AI Toolkits
           </span>
         </h1>
        
         </div>
-        <div className="h-8 bg-black" />
+        <div className="h-3 bg-black" />
         <AddEvent />
         <div className="h-8 bg-black" />
         <SendMailButton />

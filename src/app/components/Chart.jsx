@@ -4,18 +4,19 @@ import Link from "next/link";
 import * as motion from "motion/react-client";
 import { useRef } from "react";
 import { useSession, signIn } from "next-auth/react";
-import AuthButton from "./AuthButton";// Assuming you have an AuthButton component
 
 export default function Chart() {
   const constraintsRef = useRef(null);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return null;
 
   return (
     <motion.div
       ref={constraintsRef}
       className="w-screen h-screen bg-gradient-to-br from-zinc-950 to-zinc-900 flex items-center justify-center relative overflow-hidden"
     >
-      {/* Glass-like Draggable Box (Doubled Size) */}
+      {/* Glass-like Draggable Box */}
       <motion.div
         drag
         dragConstraints={constraintsRef}
@@ -39,10 +40,10 @@ export default function Chart() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Glass reflection effect */}
+        {/* Reflection Effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0 rounded-2xl pointer-events-none" />
 
-        {/* Main AI+ text */}
+        {/* Title */}
         <motion.span
           className="text-6xl font-extrabold drop-shadow-md text-white/90"
           whileHover={{ scale: 1.1 }}
@@ -51,7 +52,7 @@ export default function Chart() {
           AI+
         </motion.span>
 
-        {/* Subtitle text */}
+        {/* Subtitle */}
         <motion.span
           className="text-sm font-medium mt-4 text-center text-white/70 tracking-widest uppercase"
           initial={{ opacity: 0, y: 10 }}
@@ -62,8 +63,9 @@ export default function Chart() {
         </motion.span>
       </motion.div>
 
-      {/* Conditional Button based on Auth */}
+      {/* Auth Conditional Button */}
       <motion.div
+        className="absolute bottom-12 w-full flex justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -71,7 +73,7 @@ export default function Chart() {
         {session ? (
           <Link
             href="/google"
-            className="absolute bottom-8 right-8 px-6 py-3 rounded-xl text-white font-medium backdrop-blur-sm bg-white/10 border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 flex items-center gap-2 group"
+            className="px-6 py-3 rounded-xl text-white font-medium backdrop-blur-sm bg-white/10 border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 flex items-center gap-2 group"
           >
             Take a Demo
             <motion.span
@@ -84,14 +86,21 @@ export default function Chart() {
             </motion.span>
           </Link>
         ) : (
-          <AuthButton/>
+          <motion.button
+            onClick={() => signIn("google")}
+            className="px-6 py-3 rounded-xl text-white font-medium backdrop-blur-sm bg-blue-600/80 border border-white/20 shadow-lg hover:bg-blue-700 transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Sign in with Google
+          </motion.button>
         )}
       </motion.div>
 
-      {/* Subtle decorative elements */}
+      {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-indigo-900/20 blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 rounded-full bg-blue-900/20 blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-indigo-900/20 blur-3xl" />
+        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 rounded-full bg-blue-900/20 blur-3xl" />
       </div>
     </motion.div>
   );
