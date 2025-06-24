@@ -1,7 +1,14 @@
 import { MongoClient } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
-const options = {};
+const options = {
+  // Add any MongoClient options here if needed, e.g.:
+  // useNewUrlParser: true, // Often default in newer driver versions
+  // useUnifiedTopology: true, // Often default in newer driver versions
+  // connectTimeoutMS: 10000,
+  // socketTimeoutMS: 45000,
+  // maxPoolSize: 10,
+};
 
 let client;
 let clientPromise;
