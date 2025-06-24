@@ -44,6 +44,9 @@ export default function Navbar() {
           <Link href="/more" className={linkClass("/more")}>
             Workflows
           </Link>
+          <Link href="/contact" className={linkClass("/contact")}>
+            Contact me
+          </Link>
         </div>
 
         {session && (

@@ -1,13 +1,21 @@
 "use client";
+
+import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SendMailButton() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
+  const { data: session } = useSession();
+  const router = useRouter();
 
   const sendMail = async () => {
     setLoading(true);
     setSuccess(false);
+    setError(null);
+
     try {
       const res = await fetch("/api/gmail", {
         method: "POST",
@@ -20,10 +28,21 @@ export default function SendMailButton() {
       });
 
       const data = await res.json();
-      console.log(data);
+
+      if (!res.ok || data.error) {
+        throw new Error(data.error || "Failed to send email");
+      }
+
       setSuccess(true);
-    } catch (error) {
-      console.error("Failed to send email:", error);
+    } catch (err) {
+      console.error("Failed to send email:", err);
+      setError(err.message || "An unknown error occurred");
+
+      // If authentication fails, sign out and redirect home
+      setTimeout(async () => {
+        await signOut({ redirect: false });
+        router.push("/");
+      }, 2000); // delay for visibility
     } finally {
       setLoading(false);
     }
@@ -57,7 +76,7 @@ export default function SendMailButton() {
             <div className="text-white/90 bg-white/10 p-3 rounded-lg backdrop-blur-sm border border-white/20 min-h-[80px]">
               This is a test message from your Next.js app!
             </div>
-          
+          </div>
 
           <div className="flex justify-end mt-3">
             <button
@@ -93,12 +112,18 @@ export default function SendMailButton() {
                 "Send Email"
               )}
             </button>
-            </div>
           </div>
 
           {success && (
             <div className="w-full p-3 bg-green-400/20 text-green-100 rounded-lg backdrop-blur-sm border border-green-400/30">
               ✅ Email sent successfully!
+            </div>
+          )}
+
+          {error && (
+            <div className="w-full p-3 bg-red-500/20 text-red-200 rounded-lg backdrop-blur-sm border border-red-400/30">
+              ❌ {error} <br />
+              Signing you out...
             </div>
           )}
         </div>
