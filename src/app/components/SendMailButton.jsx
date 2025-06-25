@@ -38,8 +38,8 @@ export default function SendMailButton() {
       setSuccess(true);
     } catch (err) {
       console.error("Failed to send email:", err);
-      setError(err.message || "An unknown error occurred");}}
-/*
+      setError(err.message || "An unknown error occurred");
+
       // If authentication fails, sign out and redirect home
       setTimeout(async () => {
         await signOut({ redirect: false });
@@ -48,7 +48,7 @@ export default function SendMailButton() {
     } finally {
       setLoading(false);
     }
-  };*/
+  };
 
   return (
     <div className="flex flex-col h-[54vh] w-full p-6 rounded-lg border border-white/20 shadow-lg backdrop-blur-md bg-white/10">
