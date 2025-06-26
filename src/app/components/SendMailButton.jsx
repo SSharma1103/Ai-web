@@ -27,8 +27,6 @@ export default function SendMailButton() {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log("res", res); 
-
       const data = await res.json();
 
       if (!res.ok || data.error) {
@@ -37,14 +35,12 @@ export default function SendMailButton() {
 
       setSuccess(true);
     } catch (err) {
-      console.error("Failed to send email:", err);
       setError(err.message || "An unknown error occurred");
 
-      // If authentication fails, sign out and redirect home
       setTimeout(async () => {
         await signOut({ redirect: false });
         router.push("/");
-      }, 2000); // delay for visibility
+      }, 2000);
     } finally {
       setLoading(false);
     }
@@ -80,10 +76,26 @@ export default function SendMailButton() {
             </div>
           </div>
 
-          <div className="flex justify-end mt-3">
+          {/* Message on the left, button on the right */}
+          <div className="flex flex-wrap justify-between items-center gap-4 mt-4">
+            {/* Feedback message on the left */}
+            {success && (
+              <div className="p-3 bg-green-400/20 text-green-100 rounded-lg backdrop-blur-sm border border-green-400/30 min-w-[200px]">
+                ✅ Email sent!
+              </div>
+            )}
+
+            {error && (
+              <div className="p-3 bg-red-500/20 text-red-200 rounded-lg backdrop-blur-sm border border-red-400/30 min-w-[200px]">
+                ❌ {error} <br />
+                Signing out...
+              </div>
+            )}
+
+            {/* Button on the right */}
             <button
               onClick={sendMail}
-              className="px-6 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 disabled:opacity-50 transition-all shadow-lg border border-white/20 backdrop-blur-sm"
+              className="ml-auto px-6 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 disabled:opacity-50 transition-all shadow-lg border border-white/20 backdrop-blur-sm"
               disabled={loading}
             >
               {loading ? (
@@ -115,19 +127,6 @@ export default function SendMailButton() {
               )}
             </button>
           </div>
-
-          {success && (
-            <div className="w-full p-3 bg-green-400/20 text-green-100 rounded-lg backdrop-blur-sm border border-green-400/30">
-              ✅ Email sent successfully!
-            </div>
-          )}
-
-          {error && (
-            <div className="w-full p-3 bg-red-500/20 text-red-200 rounded-lg backdrop-blur-sm border border-red-400/30">
-              ❌ {error} <br />
-              Signing you out...
-            </div>
-          )}
         </div>
       </div>
     </div>
