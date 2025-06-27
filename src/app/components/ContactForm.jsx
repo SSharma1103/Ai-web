@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 // Load default email from environment
-const DEFAULT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "";
+const DEFAULT_EMAIL = process.env.CONTACT_EMAIL || "";
 
 export default function ContactForm() {
   const [to, setTo] = useState(DEFAULT_EMAIL);
