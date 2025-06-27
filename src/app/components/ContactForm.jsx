@@ -4,8 +4,11 @@ import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+// Load default email from environment
+const DEFAULT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "";
+
 export default function ContactForm() {
-  const [to, setTo] = useState("shivamsharma11032009@gmail.com");
+  const [to, setTo] = useState(DEFAULT_EMAIL);
   const [subject, setSubject] = useState("Hello from AI+ App");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -56,18 +59,13 @@ export default function ContactForm() {
     <div className="flex flex-col h-auto w-full max-w-xl p-6 rounded-lg border border-white/20 shadow-lg backdrop-blur-md bg-white/10 mx-auto">
       <h3 className="text-2xl font-bold text-white mb-2">📨 Contact Us</h3>
       <p className="text-white/80 mb-6">
-        Reach out to us with any questions or feedback.will get back to you
+        Reach out to us with any questions or feedback. We will get back to you.
       </p>
 
-      <div className="space-y-4">
+      <div className="">
         <div>
-          <label className="block text-white mb-1">To</label>
-          <input
-            type="email"
-            className="w-full px-4 py-2 rounded bg-white/10 border border-white/30 text-white placeholder-white/50"
-            value={to}
-            onChange={(e) => setTo(e.target.value)}
-          />
+          
+          
         </div>
 
         <div>
